@@ -1,0 +1,25 @@
+.card
+  @extend %card
+  &.-light
+    background-color: white
+    color: #171515
+    
+    & > .content-wrapper
+      display: flex
+      flex-direction: column
+      justify-content: flex-end
+      width: 100%
+      & > .preamble
+        @extend %paragraph-bold
+      & > .heading
+        @extend %heading-small
+      & > .paragraph-wrapper
+        display: flex
+        gap: 1.6rem
+        & > .paragraph
+          @extend %paragraph
+      & > .paragraph
+        @extend %paragraph
+        &.-bold
+          color: #3CBFAE
+          font-weight: 700

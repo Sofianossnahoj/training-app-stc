@@ -1,0 +1,23 @@
+.card
+  @extend %card
+  &.-dark
+    background-color: #171515
+    color: #FFFFFF
+  
+  & > .content-wrapper
+    display: flex
+    flex-direction: column-reverse
+    width: 90%
+    & > .preamble
+      @extend %paragraph-bold
+    & > .heading
+      @extend %heading-small
+    & > .paragraph
+      @extend %paragraph
+
+  & > .button-wrapper
+    display: flex
+    flex-direction: column-reverse
+    & > .button
+      height: 2.4rem
+      width: 2.4rem

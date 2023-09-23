@@ -1,0 +1,36 @@
+.page-hero
+  color: white
+  display: flex
+  flex-direction: column
+  height: 40rem
+
+  & > .image-wrapper
+    height: auto
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    z-index: -2
+    & > .image
+      width: 100%
+
+  & > .content-wrapper
+    display: flex
+    flex-direction: column
+    height: 100%
+    justify-content: flex-end
+    padding:
+      left: 2rem
+      bottom: 3rem
+    position: relative
+    & > .heading
+      @extend %heading-large
+      width: 90%
+      word-break: break-all
+    & > .preamble
+      @extend %preamble
+    & > .address-wrapper
+      display: flex
+      gap: 0.5rem
+      & > .preamble
+        @extend %preamble
