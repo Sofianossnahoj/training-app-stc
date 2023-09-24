@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 export function DateFormat() {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [sevenDaysLater, setSevenDaysLater] = useState(null);
-  // const groupedDataByDay = {};
 
   useEffect(() => {
     const today = new Date();

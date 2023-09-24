@@ -11,30 +11,29 @@ import useFetch from "@/api/api";
 const GymSchedule = () => {
   const location = useLocation();
   const { todayTimestamp, sevenDaysLaterTimestamp } = DateFormat();
-  const groupedDataByDay = {};
   const { data } = useFetch(
     `https://stc.brpsystems.com/brponline/api/ver3/businessunits/${location.state.id}/groupactivities?period.start=${todayTimestamp}&period.end=${sevenDaysLaterTimestamp}`
   );
 
-  data.forEach((item) => {
+  const groupedByDay = data.reduce((daysOfWeek, item) => {
     const durationStart = new Date(item.duration.start);
     const today = new Date();
     const tomorrow = new Date(today);
     tomorrow.setDate(today.getDate() + 1);
 
-    let dayOfWeek = durationStart.toLocaleDateString("en-US", {
-      weekday: "long",
-    });
-    if (durationStart.toDateString() === today.toDateString()) {
-      dayOfWeek = "Today";
-    } else if (durationStart.toDateString() === tomorrow.toDateString()) {
-      dayOfWeek = "Tomorrow";
+    let dayLabel =
+      durationStart.toDateString() === today.toDateString()
+        ? "Today"
+        : durationStart.toDateString() === tomorrow.toDateString()
+        ? "Tomorrow"
+        : durationStart.toLocaleDateString("en-US", { weekday: "long" });
+
+    if (!daysOfWeek[dayLabel]) {
+      daysOfWeek[dayLabel] = [];
     }
-    if (!groupedDataByDay[dayOfWeek]) {
-      groupedDataByDay[dayOfWeek] = [];
-    }
-    groupedDataByDay[dayOfWeek].push(item);
-  });
+    daysOfWeek[dayLabel].push(item);
+    return daysOfWeek;
+  }, {});
 
   return (
     <main className="schedule-page">
@@ -46,14 +45,14 @@ const GymSchedule = () => {
         postalCode={location.state.address.postalCode}
       />
       <section className="content-wrapper">
-        {Object.keys(groupedDataByDay).length === 0 ? (
+        {Object.keys(groupedByDay).length === 0 ? (
           <p className="preamble -low-opacity">No upcoming sessions</p>
         ) : (
           <p className="preamble -low-opacity">Upcoming sessions</p>
         )}
-        {Object.entries(groupedDataByDay).map(([dayOfWeek, items]) => (
-          <article className="card-list-wrapper" key={dayOfWeek}>
-            <h2 className="heading">{dayOfWeek}</h2>
+        {Object.entries(groupedByDay).map(([dayLabel, items]) => (
+          <article className="card-list-wrapper" key={dayLabel}>
+            <h2 className="heading">{dayLabel}</h2>
             <ul className="card-list">
               {items.map((item) => (
                 <li className="item" key={item.id}>
