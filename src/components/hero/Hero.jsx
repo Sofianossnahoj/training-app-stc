@@ -1,10 +1,8 @@
 import "./hero.sass";
-import Navigation from "@/components/shared/navigation/Navigation";
 
-const Header = ({ heading, preamble, city, postalCode, image }) => {
+const Hero = ({ heading, preamble, city, postalCode, image }) => {
   return (
-    <header className="page-hero">
-      <Navigation />
+    <section className="page-hero">
       <div className="image-wrapper">
         <img className="image" src={image} alt="ingen bild" />
       </div>
@@ -16,8 +14,8 @@ const Header = ({ heading, preamble, city, postalCode, image }) => {
           {city && <p className="preamble">{city}</p>}
         </div>
       </div>
-    </header>
+    </section>
   );
 };
 
-export default Header;
+export default Hero;

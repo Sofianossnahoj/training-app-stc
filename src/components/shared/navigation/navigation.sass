@@ -1,11 +1,20 @@
 .page-navigation
   color: white
-  display: flex
-  justify-content: space-between
+  display: grid
+  grid-template-columns: 1fr 1fr 1fr
   margin:
     left: 2.4rem
     top: 2.4rem
     right: 2.4rem
-  & > .button
-    background: transparent
-    border: none
+
+  & > .image-wrapper
+    display: flex
+    grid-column: 2 / 3
+    justify-content: center
+
+  & > .menu-wrapper
+    display: flex
+    justify-content: flex-end
+    & > .button
+      background: transparent
+      border: none
