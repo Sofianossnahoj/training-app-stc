@@ -1,9 +1,10 @@
 import Card from "@/components/card/buttonCard/ButtonCard";
 import Hero from "@/components/hero/Hero";
 import image from "@/assets/images/our-gym.png";
-import "./ourGyms.sass";
 
 import useFetch from "@/api/api";
+
+import "./ourGyms.sass";
 
 const OurGyms = () => {
   const { data, loading } = useFetch(
@@ -12,10 +13,10 @@ const OurGyms = () => {
   const viewHeading = "Our Gyms";
 
   return (
-    <main className="our-gyms-page">
+    <section className="our-gyms-page">
       <Hero heading={viewHeading} image={image} />
       {!loading ? (
-        <section className="content-wrapper">
+        <div className="content-wrapper">
           <ul className="card-list">
             {data.map((gym) => (
               <li className="item" key={gym.id}>
@@ -23,11 +24,11 @@ const OurGyms = () => {
               </li>
             ))}
           </ul>
-        </section>
+        </div>
       ) : (
         <p className="loading">loading...</p>
       )}
-    </main>
+    </section>
   );
 };
 

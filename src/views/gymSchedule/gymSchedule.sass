@@ -1,14 +1,14 @@
 .schedule-page
   color: #171515
+  
   & > .content-wrapper
     padding-top: 4rem
     margin:
       left: 2.4rem
       right: 2.4rem
     & > .preamble
-      &.-low-opacity
-        opacity: 70%
       @extend %preamble-bold
+      opacity: 70%
     & > .card-list-wrapper
       margin-bottom: 4rem
       & > .heading
@@ -19,3 +19,9 @@
         display: flex
         flex-direction: column
         gap:1.6rem
+          
+  & > .loading
+    @extend %preamble
+    width: 100%
+    text-align: center
+    margin-top: 2rem

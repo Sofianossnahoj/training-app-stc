@@ -1,17 +1,18 @@
 import { useLocation } from "react-router-dom";
 
-import DefaultCard from "@/components/card/defaultCard/DefaultCard";
+import DefaultCard from "@/components/card/scheduleCard/ScheduleCard";
 import Hero from "@/components/hero/Hero";
 import image from "@/assets/images/schedule.png";
-import "./gymSchedule.sass";
 
 import { DateFormat } from "@/helpers/DateFormat.jsx";
 import useFetch from "@/api/api";
 
+import "./gymSchedule.sass";
+
 const GymSchedule = () => {
   const location = useLocation();
   const { todayTimestamp, sevenDaysLaterTimestamp } = DateFormat();
-  const { data } = useFetch(
+  const { data, loading } = useFetch(
     `https://stc.brpsystems.com/brponline/api/ver3/businessunits/${location.state.id}/groupactivities?period.start=${todayTimestamp}&period.end=${sevenDaysLaterTimestamp}`
   );
 
@@ -36,7 +37,7 @@ const GymSchedule = () => {
   }, {});
 
   return (
-    <main className="schedule-page">
+    <section className="schedule-page">
       <Hero
         heading={location.state.name}
         preamble={location.state.address.street}
@@ -44,26 +45,30 @@ const GymSchedule = () => {
         city={location.state.address.city}
         postalCode={location.state.address.postalCode}
       />
-      <section className="content-wrapper">
-        {Object.keys(groupedByDay).length === 0 ? (
-          <p className="preamble -low-opacity">No upcoming sessions</p>
-        ) : (
-          <p className="preamble -low-opacity">Upcoming sessions</p>
-        )}
-        {Object.entries(groupedByDay).map(([dayLabel, items]) => (
-          <article className="card-list-wrapper" key={dayLabel}>
-            <h2 className="heading">{dayLabel}</h2>
-            <ul className="card-list">
-              {items.map((item) => (
-                <li className="item" key={item.id}>
-                  <DefaultCard data={item} />
-                </li>
-              ))}
-            </ul>
-          </article>
-        ))}
-      </section>
-    </main>
+      {!loading ? (
+        <div className="content-wrapper">
+          {Object.keys(groupedByDay).length === 0 ? (
+            <p className="preamble -low-opacity">No upcoming sessions</p>
+          ) : (
+            <p className="preamble -low-opacity">Upcoming sessions</p>
+          )}
+          {Object.entries(groupedByDay).map(([dayLabel, items]) => (
+            <article className="card-list-wrapper" key={dayLabel}>
+              <h2 className="heading">{dayLabel}</h2>
+              <ul className="card-list">
+                {items.map((item) => (
+                  <li className="item" key={item.id}>
+                    <DefaultCard data={item} />
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <p className="loading">loading...</p>
+      )}
+    </section>
   );
 };
 
