@@ -1,12 +1,13 @@
-import "./buttonCard.sass";
-import Button from "@/components/shared/linkButton/LinkButton";
 import arrowIcon from "@/assets/icons/arrow-right.svg";
+import Button from "@/components/shared/linkButton/LinkButton";
+
+import "./buttonCard.sass";
 
 const ButtonCard = ({ data }) => {
   return (
     <article className="card -dark">
       <div className="content-wrapper">
-        <h3 className="heading">{data.name}</h3>
+        <h2 className="heading">{data.name}</h2>
       </div>
       <div className="button-wrapper">
         <Button data={data} icon={arrowIcon} />
