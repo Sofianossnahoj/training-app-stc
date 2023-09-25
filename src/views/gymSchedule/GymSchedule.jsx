@@ -1,6 +1,6 @@
 import { useLocation } from "react-router-dom";
 
-import DefaultCard from "@/components/card/scheduleCard/ScheduleCard";
+import ScheduleCard from "@/components/card/scheduleCard/ScheduleCard";
 import Hero from "@/components/hero/Hero";
 import image from "@/assets/images/schedule.png";
 
@@ -58,7 +58,7 @@ const GymSchedule = () => {
               <ul className="card-list">
                 {items.map((item) => (
                   <li className="item" key={item.id}>
-                    <DefaultCard data={item} />
+                    <ScheduleCard data={item} />
                   </li>
                 ))}
               </ul>

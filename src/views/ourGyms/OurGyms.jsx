@@ -1,4 +1,4 @@
-import Card from "@/components/card/buttonCard/ButtonCard";
+import ButtonCard from "@/components/card/buttonCard/ButtonCard";
 import Hero from "@/components/hero/Hero";
 import image from "@/assets/images/our-gym.png";
 
@@ -20,7 +20,7 @@ const OurGyms = () => {
           <ul className="card-list">
             {data.map((gym) => (
               <li className="item" key={gym.id}>
-                <Card data={gym} />
+                <ButtonCard data={gym} />
               </li>
             ))}
           </ul>
